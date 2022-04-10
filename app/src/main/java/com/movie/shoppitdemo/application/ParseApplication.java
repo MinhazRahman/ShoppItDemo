@@ -2,6 +2,7 @@ package com.movie.shoppitdemo.application;
 
 import android.app.Application;
 
+import com.movie.shoppitdemo.models.Category;
 import com.movie.shoppitdemo.models.Item;
 import com.parse.Parse;
 import com.parse.ParseObject;
@@ -14,6 +15,7 @@ public class ParseApplication extends Application {
 
         // Register the parse model
         ParseObject.registerSubclass(Item.class);
+        ParseObject.registerSubclass(Category.class);
 
         Parse.initialize(new Parse.Configuration.Builder(this)
                 .applicationId("unKKRG42AIUIc75RXWpQuLYaWW5i8GF52hO5nZMe")
