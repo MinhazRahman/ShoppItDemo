@@ -68,7 +68,7 @@ public class CategoryFragment extends Fragment {
         // Set the adapter and the linear layout manager to the RecyclerView
         rvCategories.setAdapter(categoriesAdapter);
         rvCategories.setLayoutManager(gridLayoutManager);
-       // rvCategories.addItemDecoration(decoration); // Not working properly
+        rvCategories.addItemDecoration(decoration); // Not working properly
 
         // Get all the categories
         getAllCategories();
