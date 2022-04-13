@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
@@ -12,7 +13,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.movie.shoppitdemo.R;
+import com.movie.shoppitdemo.adapters.CategoriesAdapter;
 import com.movie.shoppitdemo.models.Category;
+import com.movie.shoppitdemo.utils.SpacesItemDecoration;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
@@ -24,7 +27,7 @@ public class CategoryFragment extends Fragment {
     public static final String TAG = "CategoryFragment";
 
     RecyclerView rvCategories;
-    //CategoryAdapter categoryAdapter;
+    CategoriesAdapter categoriesAdapter;
     List<Category> allCategories;
 
     public CategoryFragment() {
@@ -54,6 +57,18 @@ public class CategoryFragment extends Fragment {
 
         // Initialize the list
         allCategories = new ArrayList<>();
+        // Initialize the adapter
+        categoriesAdapter = new CategoriesAdapter(getContext(), allCategories);
+        // Initialize the layout
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
+
+        // Decorator which adds spacing around the tiles in a Grid layout RecyclerView
+        SpacesItemDecoration decoration = new SpacesItemDecoration(16);
+
+        // Set the adapter and the linear layout manager to the RecyclerView
+        rvCategories.setAdapter(categoriesAdapter);
+        rvCategories.setLayoutManager(gridLayoutManager);
+       // rvCategories.addItemDecoration(decoration); // Not working properly
 
         // Get all the categories
         getAllCategories();
@@ -82,6 +97,7 @@ public class CategoryFragment extends Fragment {
                 // Add all categories to the list
                 allCategories.addAll(categories);
                 // Notify the adapter about the data change
+                categoriesAdapter.notifyDataSetChanged();
             }
         });
     }
