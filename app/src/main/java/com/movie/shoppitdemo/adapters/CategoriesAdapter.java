@@ -1,6 +1,7 @@
 package com.movie.shoppitdemo.adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,11 +9,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.movie.shoppitdemo.R;
+import com.movie.shoppitdemo.fragments.CategoryDetailsFragment;
 import com.movie.shoppitdemo.models.Category;
 import com.parse.ParseFile;
 
@@ -69,6 +73,29 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Vi
             if (image != null){
                 Glide.with(context).load(image.getUrl()).into(ivCategoryImage);
             }
+
+            // Set click listener on CardView and open CategoryDetailsFragment when clicked on the CardView
+            cardViewCategory.setOnClickListener(new View.OnClickListener() {
+                // open CategoryDetailsFragment when clicked on the CardView
+                @Override
+                public void onClick(View view) {
+                    Log.i("CategoryFragment", "Category " + category.getCategoryName()+ " is clicked");
+                    // Cast the context to AppCompatActivity
+                    AppCompatActivity activity = (AppCompatActivity) view.getContext();
+
+                    // Create the CategoryDetailsFragment
+                    Fragment categoryDetailsFragment = new CategoryDetailsFragment();
+
+                    // Create transaction and Replace whatever is in the fragment_container view with this fragment
+                    // and finally Commit the transaction
+                    activity.
+                            getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.fragment_container,categoryDetailsFragment)
+                            .addToBackStack(null)
+                            .commit();
+                }
+            });
 
         }
     }
