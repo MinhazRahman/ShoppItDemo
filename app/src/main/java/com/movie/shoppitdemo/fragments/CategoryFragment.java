@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import com.movie.shoppitdemo.R;
 import com.movie.shoppitdemo.adapters.CategoriesAdapter;
 import com.movie.shoppitdemo.models.Category;
+import com.movie.shoppitdemo.models.OnCardViewClickListener;
 import com.movie.shoppitdemo.utils.SpacesItemDecoration;
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -23,7 +24,7 @@ import com.parse.ParseQuery;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CategoryFragment extends Fragment {
+public class CategoryFragment extends Fragment{
     public static final String TAG = "CategoryFragment";
 
     RecyclerView rvCategories;
@@ -91,7 +92,7 @@ public class CategoryFragment extends Fragment {
                 }
 
                 for (Category category: categories){
-                    Log.i(TAG,  " Category Name: " + category.getCategoryName());
+                    Log.i(TAG,  " Category Name: " + category.getCategoryName() + " Category Id: " + category.getObjectId());
                 }
 
                 // Add all categories to the list
@@ -101,4 +102,5 @@ public class CategoryFragment extends Fragment {
             }
         });
     }
+
 }

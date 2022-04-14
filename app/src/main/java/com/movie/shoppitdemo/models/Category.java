@@ -9,6 +9,7 @@ import org.parceler.Parcel;
 @ParseClassName("Category")
 @Parcel(analyze={Category.class})
 public class Category extends ParseObject {
+
     public static final String KEY_CATEGORY_NAME = "categoryName";
     public static final String KEY_CATEGORY_IMAGE = "categoryImage";
 
@@ -20,8 +21,8 @@ public class Category extends ParseObject {
         return getString(KEY_CATEGORY_NAME);
     }
 
-    public void setCategoryName(String itemName){
-        put(KEY_CATEGORY_NAME, itemName);
+    public void setCategoryName(String categoryName){
+        put(KEY_CATEGORY_NAME, categoryName);
     }
 
     public ParseFile getImage(){

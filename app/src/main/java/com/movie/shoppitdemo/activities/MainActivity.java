@@ -89,7 +89,9 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 for (Item item: items){
-                    Log.i("HomeActivity", "Item: " + item.getItemName() + " Category Name: " + item.getCategory().getCategoryName());
+                    Log.i("HomeActivity", "Item: " + item.getItemName() +
+                            " Category Name: " + item.getCategory().getCategoryName() +
+                            " Category Id: " + item.getCategory().getObjectId());
                 }
             }
         });

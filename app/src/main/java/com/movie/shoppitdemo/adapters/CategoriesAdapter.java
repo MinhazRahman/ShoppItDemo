@@ -18,6 +18,7 @@ import com.bumptech.glide.Glide;
 import com.movie.shoppitdemo.R;
 import com.movie.shoppitdemo.fragments.CategoryDetailsFragment;
 import com.movie.shoppitdemo.models.Category;
+import com.movie.shoppitdemo.models.OnCardViewClickListener;
 import com.parse.ParseFile;
 
 import java.util.List;
@@ -80,6 +81,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Vi
                 @Override
                 public void onClick(View view) {
                     Log.i("CategoryFragment", "Category " + category.getCategoryName()+ " is clicked");
+
                     // Cast the context to AppCompatActivity
                     AppCompatActivity activity = (AppCompatActivity) view.getContext();
 
