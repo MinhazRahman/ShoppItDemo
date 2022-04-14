@@ -31,6 +31,8 @@ public class CategoryDetailsFragment extends Fragment {
     RecyclerView rvItems;
     CategoryDetailsAdapter categoryDetailsAdapter;
     List<Item> allItems;
+    String categoryId;
+    Category category;
 
     public CategoryDetailsFragment() {
         // Required empty public constructor
@@ -72,15 +74,26 @@ public class CategoryDetailsFragment extends Fragment {
         rvItems.setLayoutManager(gridLayoutManager);
         rvItems.addItemDecoration(decoration); // Not working properly
 
+        // Receiving the data to the fragment
+        if (getArguments() != null) {
+            categoryId = getArguments().getString("id");
+            category = getArguments().getParcelable("categoryObj");
+
+            Log.i(TAG, "Category id: " + categoryId);
+        }
+
         // Get all the items for a particular category
+        queryItems(category);
+
     }
 
-    private void queryItem() {
+    private void queryItems(Category category) {
         // Define the class we would like to query
         ParseQuery<Item> itemParseQuery = ParseQuery.getQuery(Item.class);
 
-        // Include user key
+        // Include category key
         itemParseQuery.include(Item.KEY_ITEM_CATEGORY);
+        itemParseQuery.whereEqualTo(Item.KEY_ITEM_CATEGORY, category);
         // Execute the find asynchronously
         itemParseQuery.findInBackground(new FindCallback<Item>() {
             @Override
@@ -93,6 +106,11 @@ public class CategoryDetailsFragment extends Fragment {
                 for (Item item: items){
                     Log.i("HomeActivity", "Item: " + item.getItemName() + " Category Name: " + item.getCategory().getCategoryName());
                 }
+
+                // Add all categories to the list
+                allItems.addAll(items);
+                // Notify the adapter about the data change
+                categoryDetailsAdapter.notifyDataSetChanged();
             }
         });
     }

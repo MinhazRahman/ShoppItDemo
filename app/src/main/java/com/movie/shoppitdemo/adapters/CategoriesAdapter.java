@@ -1,6 +1,7 @@
 package com.movie.shoppitdemo.adapters;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -87,6 +88,13 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Vi
 
                     // Create the CategoryDetailsFragment
                     Fragment categoryDetailsFragment = new CategoryDetailsFragment();
+
+                    // Passing Category object to the fragment
+                    Bundle bundle = new Bundle();
+                    bundle.putParcelable("categoryObj", category);
+
+                    // Set CategoryDetailsFragment Arguments
+                    categoryDetailsFragment.setArguments(bundle);
 
                     // Create transaction and Replace whatever is in the fragment_container view with this fragment
                     // and finally Commit the transaction

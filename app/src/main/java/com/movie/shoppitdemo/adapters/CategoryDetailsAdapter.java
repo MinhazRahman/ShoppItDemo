@@ -55,17 +55,21 @@ public class CategoryDetailsAdapter extends RecyclerView.Adapter<CategoryDetails
 
         ImageView ivItemImage;
         TextView tvItemName;
+        TextView tvItemUnitPrice;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             ivItemImage = itemView.findViewById(R.id.ivItemImage);
             tvItemName = itemView.findViewById(R.id.tvItemName);
+            tvItemUnitPrice = itemView.findViewById(R.id.tvItemUnitPrice);
+
         }
 
         public void bind(Item item) {
             // Bind the Item data to the view elements
             tvItemName.setText(item.getItemName());
+            tvItemUnitPrice.setText("$ " + String.valueOf(item.getUnitPrice()));
 
             // Load the Category image
             ParseFile image = item.getImage();
