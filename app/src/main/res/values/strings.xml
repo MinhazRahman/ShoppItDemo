@@ -9,4 +9,6 @@
     <string name="hello_home_fragment">Hello Home Fragment</string>
     <string name="category_name">Category Name</string>
     <string name="item_unit_price">Item Unit Price</string>
+    <string name="add">Add</string>
+    <string name="shopping_cart">Shopping Cart</string>
 </resources>
