@@ -105,7 +105,7 @@ public class ShopFragment extends Fragment {
                 // Add all categories to the list
                 allCategories.addAll(categories);
                 // Notify the adapter about the data change
-                parentRecyclerViewCategoriesItemsAdapter.notifyDataSetChanged();
+                // parentRecyclerViewCategoriesItemsAdapter.notifyDataSetChanged();
             }
         });
     }
