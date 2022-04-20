@@ -13,7 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.movie.shoppitdemo.R;
-import com.movie.shoppitdemo.adapters.ParentRecyclerViewCategoriesItemsAdapter;
+import com.movie.shoppitdemo.adapters.ParentRecyclerViewCategoriesAdapter;
 import com.movie.shoppitdemo.models.Category;
 import com.movie.shoppitdemo.models.Item;
 import com.parse.FindCallback;
@@ -31,7 +31,7 @@ public class ShopFragment extends Fragment {
     public static final String TAG = "ShopFragment";
 
     RecyclerView rvParentCategoryAndItems;
-    ParentRecyclerViewCategoriesItemsAdapter parentRecyclerViewCategoriesItemsAdapter;
+    ParentRecyclerViewCategoriesAdapter parentRecyclerViewCategoriesAdapter;
     List<Item> allItems;
     List<Category> allCategories;
 
@@ -67,13 +67,13 @@ public class ShopFragment extends Fragment {
         allItems = new ArrayList<>();
 
         // Initialize the adapter
-        parentRecyclerViewCategoriesItemsAdapter = new ParentRecyclerViewCategoriesItemsAdapter(getContext(), allCategories, allItems);
+        parentRecyclerViewCategoriesAdapter = new ParentRecyclerViewCategoriesAdapter(getContext(), allCategories, allItems);
 
         // Initialize the layout
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
 
         // Set the adapter and the linear layout manager to the RecyclerView
-        rvParentCategoryAndItems.setAdapter(parentRecyclerViewCategoriesItemsAdapter);
+        rvParentCategoryAndItems.setAdapter(parentRecyclerViewCategoriesAdapter);
         rvParentCategoryAndItems.setLayoutManager(linearLayoutManager);
 
         // Retrieve all the categories and all the items from the Parse backend
@@ -134,7 +134,7 @@ public class ShopFragment extends Fragment {
                 // Add all categories to the list
                 allItems.addAll(items);
                 // Notify the adapter about the data change
-                parentRecyclerViewCategoriesItemsAdapter.notifyDataSetChanged();
+                parentRecyclerViewCategoriesAdapter.notifyDataSetChanged();
             }
         });
     }

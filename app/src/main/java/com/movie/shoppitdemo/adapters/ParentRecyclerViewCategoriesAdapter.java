@@ -17,18 +17,18 @@ import com.movie.shoppitdemo.models.Item;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ParentRecyclerViewCategoriesItemsAdapter extends RecyclerView.Adapter<ParentRecyclerViewCategoriesItemsAdapter.ViewHolder> {
+public class ParentRecyclerViewCategoriesAdapter extends RecyclerView.Adapter<ParentRecyclerViewCategoriesAdapter.ViewHolder> {
 
     Context context;
     List<Category> categories;
     List<Item> items;
 
-    public ParentRecyclerViewCategoriesItemsAdapter(Context context, List<Category> categories) {
+    public ParentRecyclerViewCategoriesAdapter(Context context, List<Category> categories) {
         this.context = context;
         this.categories = categories;
     }
 
-    public ParentRecyclerViewCategoriesItemsAdapter(Context context, List<Category> categories, List<Item> items) {
+    public ParentRecyclerViewCategoriesAdapter(Context context, List<Category> categories, List<Item> items) {
         this.context = context;
         this.categories = categories;
         this.items = items;
