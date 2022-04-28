@@ -1,8 +1,12 @@
 package com.movie.shoppitdemo.fragments;
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.SearchView;
+import androidx.core.view.MenuItemCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -33,6 +37,8 @@ public class SearchFragment extends Fragment {
     RecyclerView rvSearchItems;
     SearchItemsAdapter searchItemsAdapter;
     List<Item> allItems;
+    MenuItem menuItemSearch;
+    SearchView searchView;
 
     // Required empty public constructor
     public SearchFragment() {
@@ -48,6 +54,7 @@ public class SearchFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_search, container, false);
 
@@ -87,7 +94,36 @@ public class SearchFragment extends Fragment {
 
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        // menu.clear(); // Remove all the old menu items
         inflater.inflate(R.menu.search_menu, menu);
+
+        // Hide the action_add menu item
+        MenuItem itemAdd = menu.findItem(R.id.action_add);
+        itemAdd.setVisible(false);
+
+        // Get the search item
+        menuItemSearch = menu.findItem(R.id.action_search);
+        // Get action view from the menu item and cast into SearchView
+        searchView = (SearchView) menuItemSearch.getActionView();
+
+        // Set QueryTextListener on SearchView
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                Log.i(TAG, "onQueryTextSubmit: " + query);
+                searchView.clearFocus();
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                Log.i(TAG, "onQueryTextChange: " + newText);
+                // searchItemsAdapter.getFilter().filter(newText);
+                queryAllItems(newText);
+                return false;
+            }
+        });
     }
 
     private void queryAllItems() {
@@ -113,6 +149,41 @@ public class SearchFragment extends Fragment {
 
                 // Add all categories to the list
                 allItems.addAll(items);
+                // Notify the adapter about the data change
+                searchItemsAdapter.notifyDataSetChanged();
+            }
+        });
+    }
+
+    private void queryAllItems(String itemName) {
+        List<Item> filteredItems = new ArrayList<>();
+
+        // Define the class we would like to query
+        ParseQuery<Item> itemParseQuery = ParseQuery.getQuery(Item.class);
+
+        // Include category key
+        itemParseQuery.include(Item.KEY_ITEM_CATEGORY);
+        itemParseQuery.orderByAscending(Item.KEY_ITEM_NAME);
+
+        // Execute the find asynchronously
+        itemParseQuery.findInBackground(new FindCallback<Item>() {
+            @Override
+            public void done(List<Item> items, ParseException e) {
+                if (e != null){
+                    Log.e(TAG, "ERROR while retrieving items", e);
+                    return;
+                }
+
+                for (Item item: items){
+                    if (item.getItemName().toLowerCase().contains(itemName.toLowerCase())){
+                        filteredItems.add(item);
+                        Log.i("SearchItemsAdapter", "Item name:" + item.getItemName());
+                    }
+                }
+
+                allItems.clear();
+                // Add all categories to the list
+                allItems.addAll(filteredItems);
                 // Notify the adapter about the data change
                 searchItemsAdapter.notifyDataSetChanged();
             }

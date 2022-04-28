@@ -15,16 +15,19 @@ import com.movie.shoppitdemo.R;
 import com.movie.shoppitdemo.models.Item;
 import com.parse.ParseFile;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class SearchItemsAdapter extends RecyclerView.Adapter<SearchItemsAdapter.ViewHolder>{
+public class SearchItemsAdapter extends RecyclerView.Adapter<SearchItemsAdapter.ViewHolder> {
 
     Context context;
     List<Item> items;
+    List<Item> allItems;
 
     public SearchItemsAdapter(Context context, List<Item> items) {
         this.context = context;
         this.items = items;
+        this.allItems = new ArrayList<>(items);
     }
 
     // inflate item layout from XML and return the holder
