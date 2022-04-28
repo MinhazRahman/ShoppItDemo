@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         // Sets the Toolbar to act as the ActionBar for this Activity window.
         // Make sure the toolbar exists in the activity and is not null
         setSupportActionBar(toolbar);
+        toolbar.setTitle("ShoppItDemo");
 
         // Find the elements
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);

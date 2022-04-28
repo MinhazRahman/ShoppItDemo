@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SearchView;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -64,6 +65,9 @@ public class ShopFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        Toolbar toolbar= Toolbar.class.cast(getActivity().findViewById(R.id.toolbar));
+        toolbar.setTitle("ShoppItDemo");
 
         // Setup any handles to view objects here
         rvParentCategoryAndItems = view.findViewById(R.id.rvParentCategoryAndItems);

@@ -3,10 +3,14 @@ package com.movie.shoppitdemo.fragments;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -52,6 +56,9 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        Toolbar toolbar= Toolbar.class.cast(getActivity().findViewById(R.id.toolbar));
+        toolbar.setTitle("ShoppItDemo");
+
         tvText = view.findViewById(R.id.tvText);
         ivListIcon = view.findViewById(R.id.ivListIcon);
         rvShoppingLists = view.findViewById(R.id.rvShoppingLists);
@@ -62,6 +69,12 @@ public class HomeFragment extends Fragment {
         // Initialize recycler view
 
         showMessageOnEmptyRecyclerView();
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+
     }
 
     // Show a message to the user if the RecyclerView is empty

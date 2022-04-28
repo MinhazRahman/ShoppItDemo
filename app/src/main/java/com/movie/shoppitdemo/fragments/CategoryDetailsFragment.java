@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -87,6 +89,10 @@ public class CategoryDetailsFragment extends Fragment {
             Log.i(TAG, "Category id: " + categoryId);
         }
 
+        // Change the toolbar title
+        Toolbar toolbar= Toolbar.class.cast(getActivity().findViewById(R.id.toolbar));
+        toolbar.setTitle(category.getCategoryName());
+
         // Get all the items for a particular category
         queryItems(category);
 
@@ -99,6 +105,8 @@ public class CategoryDetailsFragment extends Fragment {
         // Hide the action_add menu item
         MenuItem itemAdd = menu.findItem(R.id.action_add);
         itemAdd.setVisible(false);
+
+        // ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(category.getCategoryName());
     }
 
     private void queryItems(Category category) {
