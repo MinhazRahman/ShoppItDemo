@@ -59,8 +59,12 @@ public class CategoryFragment extends Fragment{
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        // Set toolbar title
         Toolbar toolbar= Toolbar.class.cast(getActivity().findViewById(R.id.toolbar));
+        assert toolbar != null;
         toolbar.setTitle("ShoppItDemo");
+        // Set toolbar navigation icon to null
+        toolbar.setNavigationIcon(null);
 
         // Setup any handles to view objects here
         rvCategories = view.findViewById(R.id.rvCategories);

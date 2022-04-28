@@ -28,6 +28,7 @@ import com.parse.ParseQuery;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class CategoryDetailsFragment extends Fragment {
 
@@ -89,9 +90,21 @@ public class CategoryDetailsFragment extends Fragment {
             Log.i(TAG, "Category id: " + categoryId);
         }
 
-        // Change the toolbar title
+        // Change the toolbar title dynamically
         Toolbar toolbar= Toolbar.class.cast(getActivity().findViewById(R.id.toolbar));
+        assert toolbar != null;
         toolbar.setTitle(category.getCategoryName());
+
+        // set toolbar navigation icon: back arrow
+        toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_24);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // getActivity().onBackPressed();
+                requireActivity().getSupportFragmentManager().popBackStack();
+            }
+        });
+
 
         // Get all the items for a particular category
         queryItems(category);
