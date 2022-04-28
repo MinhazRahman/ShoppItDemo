@@ -13,4 +13,5 @@
     android:background="@color/purple_500"
     app:popupTheme="@style/PopupOverlay"
     app:menu="@menu/menu_main"
-    app:titleCentered="true"/>
+    app:titleCentered="true"
+    app:collapseIcon="@drawable/ic_baseline_arrow_back_24"/>

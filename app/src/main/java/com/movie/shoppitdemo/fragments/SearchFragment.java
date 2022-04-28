@@ -2,6 +2,7 @@ package com.movie.shoppitdemo.fragments;
 
 import android.app.SearchManager;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -19,6 +20,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.movie.shoppitdemo.R;
 import com.movie.shoppitdemo.adapters.SearchItemsAdapter;
@@ -110,6 +114,20 @@ public class SearchFragment extends Fragment {
         menuItemSearch = menu.findItem(R.id.action_search);
         // Get action view from the menu item and cast into SearchView
         searchView = (SearchView) menuItemSearch.getActionView();
+
+        /* Expanding the search view */
+        searchView.setIconified(true);
+        searchView.setIconifiedByDefault(true);
+
+        EditText txtSearch = ((EditText)searchView.findViewById(androidx.appcompat.R.id.search_src_text));
+        txtSearch.setHintTextColor(Color.WHITE);
+        txtSearch.setTextColor(Color.WHITE);
+
+        ImageView searchClose = searchView.findViewById(androidx.appcompat.R.id.search_close_btn);
+        searchClose.setColorFilter(Color.WHITE);
+
+        ImageView searchIcon = searchView.findViewById(androidx.appcompat.R.id.search_button);
+        searchIcon.setColorFilter(Color.WHITE);
 
         // Set QueryTextListener on SearchView
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
