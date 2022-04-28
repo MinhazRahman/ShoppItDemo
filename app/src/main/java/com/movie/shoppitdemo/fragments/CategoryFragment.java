@@ -9,6 +9,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -38,11 +41,13 @@ public class CategoryFragment extends Fragment{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_category, container, false);
     }
@@ -73,6 +78,15 @@ public class CategoryFragment extends Fragment{
 
         // Get all the categories
         getAllCategories();
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+
+        // Hide the action_add menu item
+        MenuItem itemAdd = menu.findItem(R.id.action_add);
+        itemAdd.setVisible(false);
     }
 
     // Retrieve all the categories from the Parse backend
