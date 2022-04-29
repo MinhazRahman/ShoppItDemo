@@ -7,7 +7,13 @@
         android:id="@+id/action_search"
         android:icon="@drawable/ic_baseline_search_white_32"
         app:showAsAction="always|collapseActionView"
-        android:title="@string/search"
+        android:title="Search items.."
         app:actionViewClass="androidx.appcompat.widget.SearchView">
+    </item>
+    <item
+        android:id="@+id/action_shopping_cart"
+        android:icon="@drawable/ic_baseline_shopping_cart_32"
+        app:showAsAction="ifRoom|withText"
+        android:title="@string/shopping_cart">
     </item>
 </menu>

@@ -8,10 +8,12 @@
     app:contentInsetLeft="0dp"
     app:contentInsetStart="0dp"
     app:titleTextColor="@android:color/white"
+    app:subtitleTextColor="@color/white"
     app:title="@string/app_name"
     android:textSize = "20sp"
     android:background="@color/purple_500"
     app:popupTheme="@style/PopupOverlay"
+    app:theme="@style/SearchViewStyle"
     app:menu="@menu/menu_main"
     app:titleCentered="true"
     app:collapseIcon="@drawable/ic_baseline_arrow_back_24"/>

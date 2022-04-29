@@ -44,7 +44,7 @@ public class ProfileFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         Toolbar toolbar= Toolbar.class.cast(getActivity().findViewById(R.id.toolbar));
-        toolbar.setTitle("ShoppItDemo");
+        toolbar.setTitle("Profile");
     }
 
     @Override

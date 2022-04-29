@@ -62,7 +62,7 @@ public class CategoryFragment extends Fragment{
         // Set toolbar title
         Toolbar toolbar= Toolbar.class.cast(getActivity().findViewById(R.id.toolbar));
         assert toolbar != null;
-        toolbar.setTitle("ShoppItDemo");
+        toolbar.setTitle("Categories");
         // Set toolbar navigation icon to null
         toolbar.setNavigationIcon(null);
 

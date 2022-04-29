@@ -67,7 +67,7 @@ public class ShopFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         Toolbar toolbar= Toolbar.class.cast(getActivity().findViewById(R.id.toolbar));
-        toolbar.setTitle("ShoppItDemo");
+        toolbar.setTitle("Shop online");
 
         // Setup any handles to view objects here
         rvParentCategoryAndItems = view.findViewById(R.id.rvParentCategoryAndItems);

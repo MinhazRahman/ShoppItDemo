@@ -75,7 +75,7 @@ public class SearchFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         Toolbar toolbar= Toolbar.class.cast(getActivity().findViewById(R.id.toolbar));
-        toolbar.setTitle("ShoppItDemo");
+        toolbar.setTitle("Search Items");
 
         // Setup any handles to view objects here
         rvSearchItems = view.findViewById(R.id.rvSearchItems);
@@ -103,31 +103,42 @@ public class SearchFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-        // menu.clear(); // Remove all the old menu items
+        menu.clear(); // Remove all the old menu items
         inflater.inflate(R.menu.search_menu, menu);
 
         // Hide the action_add menu item
-        MenuItem itemAdd = menu.findItem(R.id.action_add);
-        itemAdd.setVisible(false);
+        // MenuItem itemAdd = menu.findItem(R.id.action_add);
+        // itemAdd.setVisible(false);
 
         // Get the search item
         menuItemSearch = menu.findItem(R.id.action_search);
         // Get action view from the menu item and cast into SearchView
         searchView = (SearchView) menuItemSearch.getActionView();
 
-        /* Expanding the search view */
+        // Edit search view properties
+        // Expanding the search view
         searchView.setIconified(true);
         searchView.setIconifiedByDefault(true);
 
+        /*
+        // Search text
         EditText txtSearch = ((EditText)searchView.findViewById(androidx.appcompat.R.id.search_src_text));
         txtSearch.setHintTextColor(Color.WHITE);
         txtSearch.setTextColor(Color.WHITE);
 
+        // Search close button
         ImageView searchClose = searchView.findViewById(androidx.appcompat.R.id.search_close_btn);
         searchClose.setColorFilter(Color.WHITE);
 
+        // Search button
         ImageView searchIcon = searchView.findViewById(androidx.appcompat.R.id.search_button);
         searchIcon.setColorFilter(Color.WHITE);
+
+        ImageView magImage = (ImageView) searchView.findViewById(androidx.appcompat.R.id.search_mag_icon);
+        magImage.setVisibility(View.GONE);
+        magImage.setImageDrawable(null);
+
+         */
 
         // Set QueryTextListener on SearchView
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
