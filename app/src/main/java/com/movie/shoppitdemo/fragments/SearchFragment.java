@@ -115,12 +115,12 @@ public class SearchFragment extends Fragment {
         // Get action view from the menu item and cast into SearchView
         searchView = (SearchView) menuItemSearch.getActionView();
 
+        /**
         // Edit search view properties
         // Expanding the search view
-        searchView.setIconified(true);
-        searchView.setIconifiedByDefault(true);
+        // searchView.setIconified(true);
+        // searchView.setIconifiedByDefault(true);
 
-        /*
         // Search text
         EditText txtSearch = ((EditText)searchView.findViewById(androidx.appcompat.R.id.search_src_text));
         txtSearch.setHintTextColor(Color.WHITE);
@@ -137,7 +137,6 @@ public class SearchFragment extends Fragment {
         ImageView magImage = (ImageView) searchView.findViewById(androidx.appcompat.R.id.search_mag_icon);
         magImage.setVisibility(View.GONE);
         magImage.setImageDrawable(null);
-
          */
 
         // Set QueryTextListener on SearchView

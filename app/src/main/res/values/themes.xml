@@ -36,6 +36,7 @@
         <item name="android:textColorSecondary">@color/white</item>
         <!-- note that this is how you style your hint icon -->
         <item name="searchHintIcon">@null</item>
+        <item name="searchIcon">@null</item>
         <item name="android:textColorHint">@color/white</item>
         <!-- Background for the search query section (e.g. EditText) -->
         <item name="queryBackground">@color/white</item>
