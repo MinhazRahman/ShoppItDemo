@@ -62,6 +62,23 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Fragment fragment = null;
+
+        // When clicked on Add menu item
+        if (item.getItemId() == R.id.action_add){
+            return super.onOptionsItemSelected(item);
+        }
+
+        if (item.getItemId() == R.id.action_create_list) {
+            fragment = new HomeFragment();
+        }
+
+        fragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit();
+        return true;
+    }
+
     // Define click listener on bottom navigation
     private BottomNavigationView.OnItemSelectedListener navItemSelectedListener = new BottomNavigationView.OnItemSelectedListener(){
         @Override

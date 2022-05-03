@@ -8,6 +8,16 @@
         android:icon="@drawable/ic_baseline_add_32"
         app:showAsAction="always|collapseActionView"
         android:title="@string/add">
+
+        <!-- submenu -->
+        <menu>
+            <item
+                android:id="@+id/action_create_list"
+                android:icon="@drawable/ic_baseline_format_list_bulleted_24"
+                app:showAsAction="withText"
+                android:title="Create Shopping List" />
+
+        </menu>
     </item>
     <item
         android:id="@+id/action_shopping_cart"

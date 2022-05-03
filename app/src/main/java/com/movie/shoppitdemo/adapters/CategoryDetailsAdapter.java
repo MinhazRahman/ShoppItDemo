@@ -135,4 +135,5 @@ public class CategoryDetailsAdapter extends RecyclerView.Adapter<CategoryDetails
         }
     }
 
+
 }
