@@ -14,20 +14,28 @@ import androidx.fragment.app.FragmentManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.movie.shoppitdemo.R;
 import com.movie.shoppitdemo.fragments.CategoryFragment;
+import com.movie.shoppitdemo.fragments.CreateShoppingListDialog;
 import com.movie.shoppitdemo.fragments.HomeFragment;
 import com.movie.shoppitdemo.fragments.ProfileFragment;
 import com.movie.shoppitdemo.fragments.SearchFragment;
 import com.movie.shoppitdemo.fragments.ShopFragment;
 import com.movie.shoppitdemo.models.Item;
+import com.movie.shoppitdemo.models.ShoppingList;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements CreateShoppingListDialog.OnInputListener {
 
+    private static final String TAG = "MainActivity";
+    
     final FragmentManager fragmentManager = getSupportFragmentManager();
+    
+    // variables
+    List<ShoppingList> shoppingLists;
+    String shoppingListName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +72,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        Fragment fragment = null;
 
         // When clicked on Add menu item
         if (item.getItemId() == R.id.action_add){
@@ -72,10 +79,11 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if (item.getItemId() == R.id.action_create_list) {
-            fragment = new HomeFragment();
+
+            CreateShoppingListDialog editNameDialogFragment = CreateShoppingListDialog.newInstance("Add a Shopping List");
+            editNameDialogFragment.show(fragmentManager, "fragment_edit_name");
         }
 
-        fragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit();
         return true;
     }
 
@@ -130,4 +138,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public void sendInput(String input) {
+        Log.d(TAG, "sendInput: got the input: " + input);
+
+        shoppingListName = input;
+
+        Log.d(TAG, "Shopping List Name: " + shoppingListName);
+
+    }
+
 }
