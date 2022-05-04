@@ -1,6 +1,5 @@
 package com.movie.shoppitdemo.fragments;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,7 +15,7 @@ import androidx.fragment.app.DialogFragment;
 
 import com.movie.shoppitdemo.R;
 
-public class CreateShoppingListDialog extends DialogFragment {
+public class ShoppingListDialogFragment extends DialogFragment {
     public static String TAG = "CreateShoppingListDialog";
 
     // Create an interface to send the input
@@ -29,14 +28,14 @@ public class CreateShoppingListDialog extends DialogFragment {
     private EditText etListName;
     private TextView tvDone, tvCancel;
 
-    public CreateShoppingListDialog() {
+    public ShoppingListDialogFragment() {
         // Empty constructor is required for DialogFragment
         // Make sure not to add arguments to the constructor
         // Use `newInstance` instead as shown below
     }
 
-    public static CreateShoppingListDialog newInstance(String title) {
-        CreateShoppingListDialog frag = new CreateShoppingListDialog();
+    public static ShoppingListDialogFragment newInstance(String title) {
+        ShoppingListDialogFragment frag = new ShoppingListDialogFragment();
         Bundle args = new Bundle();
         args.putString("title", title);
         frag.setArguments(args);

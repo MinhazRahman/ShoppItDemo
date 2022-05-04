@@ -14,7 +14,7 @@ import androidx.fragment.app.FragmentManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.movie.shoppitdemo.R;
 import com.movie.shoppitdemo.fragments.CategoryFragment;
-import com.movie.shoppitdemo.fragments.CreateShoppingListDialog;
+import com.movie.shoppitdemo.fragments.ShoppingListDialogFragment;
 import com.movie.shoppitdemo.fragments.HomeFragment;
 import com.movie.shoppitdemo.fragments.ProfileFragment;
 import com.movie.shoppitdemo.fragments.SearchFragment;
@@ -27,7 +27,7 @@ import com.parse.ParseQuery;
 
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements CreateShoppingListDialog.OnInputListener {
+public class MainActivity extends AppCompatActivity implements ShoppingListDialogFragment.OnInputListener {
 
     private static final String TAG = "MainActivity";
     
@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements CreateShoppingLis
 
         if (item.getItemId() == R.id.action_create_list) {
 
-            CreateShoppingListDialog shoppingListDialog = CreateShoppingListDialog.newInstance("Add a Shopping List");
+            ShoppingListDialogFragment shoppingListDialog = ShoppingListDialogFragment.newInstance("Add a Shopping List");
             shoppingListDialog.show(fragmentManager, "dialog_create_shopping_list");
             /**
             // Cast the context to AppCompatActivity
