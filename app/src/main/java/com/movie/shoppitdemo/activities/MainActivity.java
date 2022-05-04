@@ -20,6 +20,7 @@ import com.movie.shoppitdemo.fragments.ProfileFragment;
 import com.movie.shoppitdemo.fragments.SearchFragment;
 import com.movie.shoppitdemo.fragments.ShopFragment;
 import com.movie.shoppitdemo.models.Item;
+import com.movie.shoppitdemo.models.ShoppingList;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
@@ -160,6 +161,14 @@ public class MainActivity extends AppCompatActivity implements CreateShoppingLis
         });
     }
 
+    // Create ShoppingList object with a given name
+    private void createShoppingList(String shoppingListName){
+        // Create the ShoppingList object and save in the parse backend;
+        ShoppingList shoppingList = new ShoppingList();
+        shoppingList.setShoppingListName(shoppingListName);
+        shoppingList.saveInBackground();
+    }
+
     @Override
     public void sendInput(String input) {
         Log.d(TAG, "sendInput: got the input: " + input);
@@ -168,6 +177,9 @@ public class MainActivity extends AppCompatActivity implements CreateShoppingLis
 
         Log.d(TAG, "Shopping List Name: " + shoppingListName);
 
+        // Create a shopping list object with the given name and save it into the parse db
+        createShoppingList(shoppingListName);
+
         // Pass the input to the HomeFragment
         // Get the activity
         AppCompatActivity activity =  MainActivity.this;
@@ -175,12 +187,14 @@ public class MainActivity extends AppCompatActivity implements CreateShoppingLis
         // Create the HomeFragment
         Fragment homeFragment = new HomeFragment();
 
+        /**
         // Passing shoppingListName to the home fragment
         Bundle bundle = new Bundle();
         bundle.putString("shoppingListName", shoppingListName);
 
         // Set HomeFragment Arguments
         homeFragment.setArguments(bundle);
+         */
 
         // Create transaction and Replace whatever is in the fragment_container view with this fragment
         // and finally Commit the transaction

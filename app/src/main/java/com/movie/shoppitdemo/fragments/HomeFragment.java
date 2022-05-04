@@ -106,6 +106,7 @@ public class HomeFragment extends Fragment {
         rvShoppingLists.setLayoutManager(linearLayoutManager);
         rvShoppingLists.addItemDecoration(itemDecoration);
 
+        /**
         // Receiving the data to the fragment
         if (getArguments() != null) {
             // Retrieve the data from the fragment arguments
@@ -115,6 +116,7 @@ public class HomeFragment extends Fragment {
             // Create a new shopping list
             createShoppingList(shoppingListName);
         }
+         */
 
         // Populate shopping lists
         getAllShoppingLists();
