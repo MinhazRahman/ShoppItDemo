@@ -29,6 +29,7 @@ import com.movie.shoppitdemo.models.Item;
 import com.movie.shoppitdemo.models.ShoppingList;
 import com.parse.FindCallback;
 import com.parse.ParseException;
+import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
 import java.util.ArrayList;
@@ -107,9 +108,12 @@ public class HomeFragment extends Fragment {
 
         // Receiving the data to the fragment
         if (getArguments() != null) {
+            // Retrieve the data from the fragment arguments
             shoppingListName = getArguments().getString("shoppingListName");
 
             Log.i(TAG, "Shopping List Name: " + shoppingListName);
+            // Create a new shopping list
+            createShoppingList(shoppingListName);
         }
 
         // Populate shopping lists
@@ -129,7 +133,15 @@ public class HomeFragment extends Fragment {
         tvText.setVisibility(View.VISIBLE);
     }
 
-    // Retrieve all the categories from the Parse backend
+    // Create ShoppingList object with a given name
+    private void createShoppingList(String shoppingListName){
+        // Create the ShoppingList object and save in the parse backend;
+        ShoppingList shoppingList = new ShoppingList();
+        shoppingList.setShoppingListName(shoppingListName);
+        shoppingList.saveInBackground();
+    }
+
+    // Retrieve all the ShoppingList objects from the Parse backend
     private void getAllShoppingLists() {
         // Define the class we would like to query
         ParseQuery<ShoppingList> shoppingListParseQuery = ParseQuery.getQuery(ShoppingList.class);

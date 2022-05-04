@@ -1,17 +1,25 @@
 package com.movie.shoppitdemo.adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.movie.shoppitdemo.R;
+import com.movie.shoppitdemo.fragments.CategoryDetailsFragment;
+import com.movie.shoppitdemo.fragments.HomeFragment;
 import com.movie.shoppitdemo.models.ShoppingList;
 
+import java.lang.reflect.Method;
 import java.util.List;
 
 public class ShoppingListsAdapter extends RecyclerView.Adapter<ShoppingListsAdapter.ViewHolder>{
@@ -64,18 +72,73 @@ public class ShoppingListsAdapter extends RecyclerView.Adapter<ShoppingListsAdap
     public class ViewHolder extends RecyclerView.ViewHolder{
         // Widgets
         TextView tvShoppingList;
-        TextView tvShoppingListActions;
+        TextView tvShoppingListOptions;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             // Initialize the widgets
             tvShoppingList = itemView.findViewById(R.id.tvShoppingList);
-            tvShoppingListActions = itemView.findViewById(R.id.tvShoppingListActions);
+            tvShoppingListOptions = itemView.findViewById(R.id.tvShoppingListOptions);
         }
 
         public void bind(ShoppingList shoppingList) {
             tvShoppingList.setText(shoppingList.getShoppingListName());
+
+            // Set click listener on shopping list options
+            tvShoppingListOptions.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    // Attach the popup menu with the view
+                    PopupMenu popupMenu = new PopupMenu(context, view);
+
+                    // Use reflection to show the icons in the menu.
+                    try {
+                        Method method = popupMenu.getMenu().getClass().getDeclaredMethod("setOptionalIconsVisible", boolean.class);
+                        method.setAccessible(true);
+                        method.invoke(popupMenu.getMenu(), true);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    // Inflate the menu
+                    popupMenu.getMenuInflater().inflate(R.menu.menu_shopping_list, popupMenu.getMenu());
+
+                    // Set click listener on each item of the pop up menu
+                    popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                        @Override
+                        public boolean onMenuItemClick(MenuItem menuItem) {
+                            switch (menuItem.getItemId()){
+                                case R.id.action_rename:
+                                    Log.i("ShoppingListsAdapter", "Clicked on Rename");
+                                    return true;
+                                case R.id.action_delete:
+                                    Log.i("ShoppingListsAdapter", "Clicked on Delete");
+                                    shoppingList.deleteInBackground();
+
+                                    // Cast the context to AppCompatActivity
+                                    AppCompatActivity activity = (AppCompatActivity) view.getContext();
+
+                                    // Create the HomeFragment
+                                    Fragment homeFragment = new HomeFragment();
+                                    // Create transaction and Replace whatever is in the fragment_container view with this fragment
+                                    // and finally Commit the transaction
+                                    activity.
+                                            getSupportFragmentManager()
+                                            .beginTransaction()
+                                            .replace(R.id.fragment_container,homeFragment)
+                                            .addToBackStack(null)
+                                            .commit();
+
+                                    return true;
+                                default:
+                                    return false;
+                            }
+                        }
+                    });
+                    popupMenu.show();
+                }
+            });
         }
     }
 
