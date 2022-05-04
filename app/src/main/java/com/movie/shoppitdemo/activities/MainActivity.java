@@ -4,15 +4,19 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.movie.shoppitdemo.R;
+import com.movie.shoppitdemo.adapters.ShoppingListsAdapter;
 import com.movie.shoppitdemo.fragments.CategoryFragment;
 import com.movie.shoppitdemo.fragments.CreateShoppingListDialog;
 import com.movie.shoppitdemo.fragments.HomeFragment;
@@ -25,6 +29,7 @@ import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements CreateShoppingListDialog.OnInputListener {
@@ -34,7 +39,6 @@ public class MainActivity extends AppCompatActivity implements CreateShoppingLis
     final FragmentManager fragmentManager = getSupportFragmentManager();
     
     // variables
-    List<ShoppingList> shoppingLists;
     String shoppingListName;
 
     @Override

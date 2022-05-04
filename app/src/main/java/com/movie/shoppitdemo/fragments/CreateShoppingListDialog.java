@@ -62,7 +62,7 @@ public class CreateShoppingListDialog extends DialogFragment {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "onClick: closing dialog");
-                getDialog().dismiss();
+                dismiss();
             }
         });
 
@@ -77,7 +77,7 @@ public class CreateShoppingListDialog extends DialogFragment {
                 // Send the shopping list name using interface
                 mOnInputListener.sendInput(input);
 
-                getDialog().dismiss();
+                dismiss();
             }
         });
     }
