@@ -4,19 +4,15 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.movie.shoppitdemo.R;
-import com.movie.shoppitdemo.adapters.ShoppingListsAdapter;
 import com.movie.shoppitdemo.fragments.CategoryFragment;
 import com.movie.shoppitdemo.fragments.CreateShoppingListDialog;
 import com.movie.shoppitdemo.fragments.HomeFragment;
@@ -24,12 +20,10 @@ import com.movie.shoppitdemo.fragments.ProfileFragment;
 import com.movie.shoppitdemo.fragments.SearchFragment;
 import com.movie.shoppitdemo.fragments.ShopFragment;
 import com.movie.shoppitdemo.models.Item;
-import com.movie.shoppitdemo.models.ShoppingList;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements CreateShoppingListDialog.OnInputListener {
@@ -37,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements CreateShoppingLis
     private static final String TAG = "MainActivity";
     
     final FragmentManager fragmentManager = getSupportFragmentManager();
-    
+
     // variables
     String shoppingListName;
 
@@ -84,8 +78,31 @@ public class MainActivity extends AppCompatActivity implements CreateShoppingLis
 
         if (item.getItemId() == R.id.action_create_list) {
 
-            CreateShoppingListDialog editNameDialogFragment = CreateShoppingListDialog.newInstance("Add a Shopping List");
-            editNameDialogFragment.show(fragmentManager, "fragment_edit_name");
+            CreateShoppingListDialog shoppingListDialog = CreateShoppingListDialog.newInstance("Add a Shopping List");
+            shoppingListDialog.show(fragmentManager, "dialog_create_shopping_list");
+            /**
+            // Cast the context to AppCompatActivity
+            AppCompatActivity activity =  MainActivity.this;
+
+            // Create the HomeFragment
+            Fragment homeFragment = new HomeFragment();
+
+            // Passing Category object to the fragment
+            Bundle bundle = new Bundle();
+            bundle.putString("shoppingListName", shoppingListName);
+
+            // Set HomeFragment Arguments
+            homeFragment.setArguments(bundle);
+
+            // Create transaction and Replace whatever is in the fragment_container view with this fragment
+            // and finally Commit the transaction
+            activity.
+                    getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container,homeFragment)
+                    .addToBackStack(null)
+                    .commit();
+             */
         }
 
         return true;
@@ -150,6 +167,29 @@ public class MainActivity extends AppCompatActivity implements CreateShoppingLis
         shoppingListName = input;
 
         Log.d(TAG, "Shopping List Name: " + shoppingListName);
+
+        // Pass the input to the HomeFragment
+        // Get the activity
+        AppCompatActivity activity =  MainActivity.this;
+
+        // Create the HomeFragment
+        Fragment homeFragment = new HomeFragment();
+
+        // Passing shoppingListName to the home fragment
+        Bundle bundle = new Bundle();
+        bundle.putString("shoppingListName", shoppingListName);
+
+        // Set HomeFragment Arguments
+        homeFragment.setArguments(bundle);
+
+        // Create transaction and Replace whatever is in the fragment_container view with this fragment
+        // and finally Commit the transaction
+        activity.
+                getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment_container,homeFragment)
+                .addToBackStack(null)
+                .commit();
 
     }
 

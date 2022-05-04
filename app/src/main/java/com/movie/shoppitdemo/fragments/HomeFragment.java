@@ -3,8 +3,10 @@ package com.movie.shoppitdemo.fragments;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,12 +15,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.movie.shoppitdemo.R;
+import com.movie.shoppitdemo.activities.MainActivity;
 import com.movie.shoppitdemo.adapters.ShoppingListsAdapter;
 import com.movie.shoppitdemo.models.Category;
 import com.movie.shoppitdemo.models.Item;
@@ -29,6 +33,7 @@ import com.parse.ParseQuery;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -37,6 +42,7 @@ import java.util.List;
 public class HomeFragment extends Fragment {
 
     private static final String TAG = "HomeFragment";
+
     // variables
     TextView tvText;
     ImageView ivListIcon;
@@ -53,11 +59,13 @@ public class HomeFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_home, container, false);
     }
@@ -97,6 +105,13 @@ public class HomeFragment extends Fragment {
         rvShoppingLists.setLayoutManager(linearLayoutManager);
         rvShoppingLists.addItemDecoration(itemDecoration);
 
+        // Receiving the data to the fragment
+        if (getArguments() != null) {
+            shoppingListName = getArguments().getString("shoppingListName");
+
+            Log.i(TAG, "Shopping List Name: " + shoppingListName);
+        }
+
         // Populate shopping lists
         getAllShoppingLists();
 
@@ -105,7 +120,6 @@ public class HomeFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-
     }
 
     // Show a message to the user if the shopping list is empty
@@ -147,4 +161,5 @@ public class HomeFragment extends Fragment {
             }
         });
     }
+
 }

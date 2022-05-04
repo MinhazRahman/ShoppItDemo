@@ -1,5 +1,6 @@
 package com.movie.shoppitdemo.fragments;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
@@ -85,6 +86,7 @@ public class CreateShoppingListDialog extends DialogFragment {
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
+
         try{
             mOnInputListener = (OnInputListener) getActivity();
         }catch (ClassCastException e){
